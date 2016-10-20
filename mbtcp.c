@@ -426,6 +426,7 @@ char * mbtcp_multi_write_req (uint8_t fc, mbtcp_handle_s *handle, cJSON *req)
             }
             ret = modbus_write_bits (handle->ctx, addr, len, bits);
             free(bits);
+            bits = NULL;
             break;
         case 16:
             // memory reset for dynamic length array
@@ -441,6 +442,7 @@ char * mbtcp_multi_write_req (uint8_t fc, mbtcp_handle_s *handle, cJSON *req)
             }
             ret = modbus_write_registers (handle->ctx, addr, len, regs);
             free(regs);
+            regs = NULL;
             break;
         default:
             return set_modbus_fail_resp_str (tid, "Invalid function code");
